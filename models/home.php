@@ -4,7 +4,7 @@ class HomeModel extends Model
 {
     public function Index()
     {
-        $this->query("SELECT date_news, title, content, new_version, new_example
+        $this->query("SELECT date_news, title, content, new_version, new_example, new_tutorial
                       FROM news 
                       WHERE visible = 1
                       ORDER BY date_news DESC, id DESC

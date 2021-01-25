@@ -1,4 +1,4 @@
-<h1>Catégorie de tutoriels</h1>
+<h1>Catégorie d'exemples</h1>
 <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
     <?php if (isset($viewModel['id']))
     {

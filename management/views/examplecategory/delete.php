@@ -1,8 +1,8 @@
 <?php Messages::display(); ?>
 <?php
-$title = 'Tutoriels';
+$title = 'Exemples';
 $recordTitle = $viewModel['title'];
-$returnPage = 'tutorials';
+$returnPage = 'examples';
 
 require('views/deleteform.php');
 ?>

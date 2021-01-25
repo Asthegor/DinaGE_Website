@@ -45,7 +45,7 @@ class ExamplesModel extends Model
                 $this->bind(':title', $post['title']);
                 $this->bind(':description', $post['content']);
                 $this->bind(':visible', isset($post['visible']) ? $post['visible'] : 0, PDO::PARAM_INT);
-                $this->bind(':file', $post['file']);
+                $this->bind(':file', $file);
                 $resp = $this->execute();
                 //Verify
                 if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file) && $resp)
