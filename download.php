@@ -1,6 +1,7 @@
 <?php 
 session_start();
 require( __DIR__ . '/autoload.php');
+require( __DIR__ . '/config.php');
 
 //has a file name been passed?
 if(!empty($_GET['file'])){
@@ -9,7 +10,13 @@ if(!empty($_GET['file'])){
 
     //protect from people getting other files
     $file = $_GET['file'];
+    if ($file === 'DinaGELastVersion')
+    {
+        $dlm = new DownLoadsModel();
+        $file = $dlm->GetLastVersion();
+    }
     $filename=basename($file);
+
 
     //does the file exist?
     if(file_exists($downloads_folder.$filename))
@@ -56,7 +63,7 @@ if(!empty($_GET['file'])){
     }
     else
     {
-        Messages::setMsg("Fichier non trouvé !", 'error');
+        Messages::setMsg("Fichier ".$filename." non trouvé !", 'error');
         exit(header("Location: ./downloads"));
     }
 

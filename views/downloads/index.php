@@ -20,7 +20,7 @@ if (!is_array($viewModelLastVersion))
             <?php
             foreach ($viewModelFiles as $file)
             {
-                $file = substr($file, strpos($file, "/")+1);
+                $file = basename($file);
                 if ($file != $lastversion)
                 {
                     ?>

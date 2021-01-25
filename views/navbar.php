@@ -17,16 +17,12 @@ $fileName = basename($_SERVER['REQUEST_URI']);
     $count = count($items);
     foreach ($items as $item)
     {
-        if ($item['destination'] === 'download.php?file=')
-        {
-            $dl = new DownloadsModel();
-            $item['destination'] .= $dl->GetLastVersion();
-            $fileName = $item['destination'];
-        }
         ?>
         <li class="nav-item" 
         <?= $item['bRight'] ? 'style="float:right"' : ''?>>
-            <a <?=  (($fileName == "" && strtolower($item['destination']) == 'home') || $fileName == $item['destination'])
+            <a <?=  (($fileName == "" && strtolower($item['destination']) == 'home') || 
+                     $fileName == $item['destination'] ||
+                     $item['destination'] === "download.php?file=DinaGELastVersion")
                     ? ' class="active" '
                     : ''; ?>
                 href="<?= ($item['bPage'] == 1 ? ROOT_URL : '').$item['destination']; ?>"

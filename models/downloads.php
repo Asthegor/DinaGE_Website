@@ -13,7 +13,7 @@ class DownloadsModel extends Model
     {
         $arrFiles = array_reverse(glob("files/engine/*.zip"));
         $last = array_shift($arrFiles);
-        return substr($last, strpos($last, "/")+1);
+        return basename($last);
     }
 }
 ?>

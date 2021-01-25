@@ -5,6 +5,7 @@ if (isset($viewModelAnnounce['content']))
 {
     ?>
     <?= urldecode($viewModelAnnounce['content']); ?>
+    <a class="btn btn-warning" href="download.php?file=DinaGELastVersion">Téléchargez Dina GE</a>
     <hr>
     <?php
 }
