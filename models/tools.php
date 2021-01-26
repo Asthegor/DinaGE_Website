@@ -2,7 +2,7 @@
 
 class ToolsModel extends Model
 {
-    public function Index()
+    public function index()
     {
         return array_reverse(glob("files/tools/*.zip"));
     }

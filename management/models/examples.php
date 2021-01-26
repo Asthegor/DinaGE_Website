@@ -20,21 +20,26 @@ class ExamplesModel extends Model
         $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_ENCODED);
         if ($post['submit'])
         {
-            if ($post['title'] == '' || $post['content'] == '' || !isset($_FILES["file"]))
+            if ($post['title'] == '')
             {
                 Messages::setMsg('Please fill in all mandatory fields', 'error');
             }
             else
             {
-                $target_dir = "files/examples/";
-                $file = basename($_FILES["file"]["name"]);
-                $target_file = ROOT_DIR.$target_dir . $file;
-                $fileExtension = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-                if($fileExtension !== "zip")
+                if (isset($_FILES["file"]))
                 {
-                    Messages::setMsg("Error : file '".$file."' must have the extension 'zip'.", 'error');
-                    return;
+                    $target_dir = ROOT_DIR. "files/examples/";
+                    $file = basename($_FILES["file"]["name"]);
+                    $target_file = $target_dir . $file;
+                    $fileExtension = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                    if($fileExtension != "" && $fileExtension !== "zip")
+                    {
+                        Messages::setMsg("Error : file '".$file."' must have the extension 'zip'.", 'error');
+                        return;
+                    }
                 }
+                else
+                    $file = "";
 
                 // Insert into MySQL
                 $this->startTransaction();
@@ -48,7 +53,12 @@ class ExamplesModel extends Model
                 $this->bind(':file', $file);
                 $resp = $this->execute();
                 //Verify
-                if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file) && $resp)
+                if (isset($_FILES["file"]))
+                    $upload = move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+                else
+                    $upload = true;
+                    
+                if ($upload && $resp)
                 {
                     Messages::setMsg("Fichier '".$file."' envoyé.", 'success');
                     $this->commit();
@@ -56,9 +66,12 @@ class ExamplesModel extends Model
                     $this->returnToPage($this->returnPage);
                     return;
                 }
-                $this->rollback();
-                $this->close();
-                Messages::setMsg('Error(s) during insert : [resp='.$resp.']', 'error');
+                else
+                {
+                    $this->rollback();
+                    $this->close();
+                    Messages::setMsg('Error(s) during update : [resp='.$resp.', upload='.$upload.']', 'error');
+                }
             }
         }
         return;
@@ -69,21 +82,27 @@ class ExamplesModel extends Model
         $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_ENCODED);
         if ($post['submit'])
         {
-            if ($post['title'] == '' || $post['content'] == '' || !isset($_FILES["file"]))
+            if ($post['title'] == '')
             {
                 Messages::setMsg('Please fill in all mandatory fields', 'error');
             }
             else
             {
-                $target_dir = "files/examples/";
-                $file = basename($_FILES["file"]["name"]);
-                $target_file = ROOT_DIR.$target_dir . $file;
-                $fileExtension = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-                if($fileExtension !== "zip")
+                if (isset($_FILES["file"]))
                 {
-                    Messages::setMsg("Error : file '".$file."' must have the extension 'zip'.", 'error');
-                    return;
+                    $target_dir = "files/examples/";
+                    $file = basename($_FILES["file"]["name"]);
+                    $target_file = ROOT_DIR.$target_dir . $file;
+                    $fileExtension = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                    if($file !='' && $fileExtension !== "zip")
+                    {
+                        Messages::setMsg("Error : file '".$file."' must have the extension 'zip'.", 'error');
+                        return;
+                    }
                 }
+                else
+                    $file = $post['filename'];
+                    
                 // Insert into MySQL
                 $this->startTransaction();
                 //Insertion des données générales
@@ -99,7 +118,13 @@ class ExamplesModel extends Model
                 $this->bind(':id', $post['id']);
                 $resp = $this->execute();
                 //Verify
-                if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file) && $resp)
+                
+                if ($file !='')
+                    $upload = move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+                else
+                    $upload = true;
+                
+                if ($upload && $resp)
                 {
                     // deplacement du fichier
                     Messages::setMsg("Fichier '".$file."' envoyé.", 'success');
@@ -112,7 +137,7 @@ class ExamplesModel extends Model
                 {
                     $this->rollback();
                     $this->close();
-                    Messages::setMsg('Error(s) during update : [resp='.$resp.']', 'error');
+                    Messages::setMsg('Error(s) during update : [resp='.$resp.', upload='.$upload.']', 'error');
                 }
             }
         }

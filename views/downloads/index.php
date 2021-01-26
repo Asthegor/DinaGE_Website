@@ -7,7 +7,7 @@ if (!is_array($viewModelLastVersion))
     <br>
     Merci de noter le site dans vos crédits si vous utilisez DinaGE dans votre projet.<br>
     <br>
-    <h3>Dernière version : <a href="./download.php?file=<?= $viewModelLastVersion; ?>"><?= $viewModelLastVersion; ?></a></h3>
+    <h3>Dernière version : <a href="<?= ROOT_URL; ?>download.php?file=<?= $viewModelLastVersion; ?>"><?= $viewModelLastVersion; ?></a></h3>
     <br>
     <?php
     if (!empty($viewModelFiles))
@@ -25,7 +25,7 @@ if (!is_array($viewModelLastVersion))
                 {
                     ?>
                     <tr>
-                        <td><a href="./download.php?file=<?= $file; ?>"><?= $file; ?></a></td>
+                        <td><a href="<?= ROOT_URL; ?>download.php?file=<?= $file; ?>"><?= $file; ?></a></td>
                     </tr>
                     <?php
                 }

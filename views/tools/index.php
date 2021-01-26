@@ -19,7 +19,7 @@ class File {
 
 $arrFiles = array();
 $currName = "";
-foreach (array_reverse(glob("files/tools/*.zip")) as $file)
+foreach (array_reverse(glob(ROOT_DIR."files/tools/*.zip")) as $file)
 {
     $file = basename($file);
     $name = substr($file, 0, strrpos($file, "_"));
@@ -62,7 +62,7 @@ foreach (array_reverse(glob("files/tools/*.zip")) as $file)
             </th>
             <th style="text-align: center; font-size: larger; height: 50px;">
                 <strong>Dernière version :</strong>
-                <a href="./download.php?tools=<?= $file; ?>"><?= $file; ?></a>
+                <a href="<?= ROOT_URL; ?>download.php?tools=<?= $file; ?>"><?= $file; ?></a>
             </th>
         </tr>
         <?php

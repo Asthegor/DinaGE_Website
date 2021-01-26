@@ -18,7 +18,7 @@ class ExampleCategoryModel extends Model
         $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_ENCODED);
         if ($post['submit'])
         {
-            if ($post['title'] == '' || $post['content'] == '')
+            if ($post['name'] == '')
             {
                 Messages::setMsg('Please fill in all mandatory fields', 'error');
             }

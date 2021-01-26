@@ -50,6 +50,7 @@
             if (isset($viewModel['file']))
             {
                 ?>
+                <input type='hidden' name="filename" value="<?= urldecode($viewModel['file']); ?>" />
                 <p width="84%">Fichier actuel : <?= urldecode($viewModel['file']); ?></p>
                 <?php
             }

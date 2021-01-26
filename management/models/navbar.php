@@ -28,7 +28,7 @@ class NavBarModel extends Model
                 // Insert into MySQL
                 $this->startTransaction();
                 //Insertion des données générales
-                $this->query('INSERT INTO navbar (title, destination, visible, bPage, sortOrder, bRight ' .
+                $this->query('INSERT INTO navbar (title, destination, visible, bPage, sortOrder, bRight) ' .
                              'VALUES (:title, :destination, :visible, :bPage, :sortOrder, :bRight)');
                 $this->bind(':title', $post['title']);
                 $this->bind(':destination', $post['destination']);

@@ -2,7 +2,7 @@
 
 class DownloadsModel extends Model
 {
-    public function Index()
+    public function index()
     {
         $arrFiles = array_reverse(glob("files/engine/*.zip"));
         array_shift($arrFiles);

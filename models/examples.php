@@ -2,7 +2,7 @@
 
 class ExamplesModel extends Model
 {
-    public function Index()
+    public function index()
     {
         $this->query("SELECT e.id, e.title, e.description, e.file,
                              ec.name category, ec.description categ_desc

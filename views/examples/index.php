@@ -16,6 +16,7 @@ foreach ($viewModel as $item)
         ?>
         <h3><?= urldecode($item['category']); ?></h3>
         <?= urldecode($item['categ_desc']); ?>
+        <hr style="text-align:left; width:50%; border-style: dashed; margin-left:0px;">
         <?php
         $index = 1;
         $curCateg = $item['category'];

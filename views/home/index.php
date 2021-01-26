@@ -1,5 +1,4 @@
 <?php
-
 // Affichage de l'annonce principale
 if (isset($viewModelAnnounce['content']))
 {

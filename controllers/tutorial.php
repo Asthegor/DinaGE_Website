@@ -5,7 +5,7 @@ class Tutorial extends Controller
     protected function index()
     {
         $viewModel = new TutorialModel();
-        $this->returnView($viewModel->Index());
+        $this->returnView($viewModel->index());
     }
 
 }

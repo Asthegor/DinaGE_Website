@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_URI"] == __FILE__)
 
 class TutorialModel extends Model
 {
-    public function Index()
+    public function index()
     {
         $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
         $this->query("SELECT t.title, t.content, t.id_Previous, t.id_Next,

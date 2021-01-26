@@ -5,7 +5,7 @@ class Tools extends Controller
     protected function index()
     {
         $viewModel = new ToolsModel();
-        $this->returnView($viewModel->Index());
+        $this->returnView($viewModel->index());
     }
 }
 
