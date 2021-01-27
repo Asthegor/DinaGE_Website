@@ -10,8 +10,8 @@
         {
             ?>
             <tr>
-                <td width="50%;"><?= $file->name; ?></td>
-                <td width="10%;"><?= $file->nbDownloads ?></td>
+                <td style="width:50%;"><?= $file->name; ?></td>
+                <td style="width:10%;"><?= $file->nbdownloads; ?></td>
             </tr>
             <?php
         }
