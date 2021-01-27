@@ -5,7 +5,7 @@ class TutorialCategoryModel extends Model
     private $returnPage = "tutorials";
     public function Index()
     {
-        $this->query("SELECT id, name, description
+        $this->query("SELECT id, name, description, sortOrder
                       FROM tutorialcategory");
         $rows = $this->resultSet();
         $this->close();
@@ -26,8 +26,8 @@ class TutorialCategoryModel extends Model
                 // Insert into MySQL
                 $this->startTransaction();
                 // Insertion du nom français
-                $this->query("INSERT INTO tutorialcategory (name, description)
-                              VALUES (:name, :description)");
+                $this->query("INSERT INTO tutorialcategory (name, description, sortOrder)
+                              VALUES (:name, :description, :sortOrder)");
                 $this->bind(':name', $post['name']);
                 $this->bind(':description', $post['content']);
                 $resp = $this->execute();
@@ -62,10 +62,12 @@ class TutorialCategoryModel extends Model
                 $this->startTransaction();
                 //Insertion des données générales
                 $this->query("UPDATE tutorialcategory
-                              SET name = :name, description = :description 
+                              SET name = :name, description = :description, 
+                              sortOrder = :sortOrder
                               WHERE id = :id");
                 $this->bind(':name', $post['name']);
                 $this->bind(':description', $post['content']);
+                $this->bind(':sortOrder', $post['sortOrder']);
                 $this->bind(':id', $post['id']);
                 $resp = $this->execute();
                 //Verify
@@ -85,7 +87,7 @@ class TutorialCategoryModel extends Model
             }
         }
         $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
-        $this->query("SELECT id, name, description 
+        $this->query("SELECT id, name, description, sortOrder 
                       FROM tutorialcategory WHERE id = :id");
         $this->bind(':id', $get['id']);
         $rows = $this->single();
@@ -130,9 +132,9 @@ class TutorialCategoryModel extends Model
     
     public function getlist($currentId)
     {
-        $query = "SELECT id, name, description 
+        $query = "SELECT id, name, description, sortOrder 
                   FROM tutorialcategory 
-                  ORDER BY name";
+                  ORDER BY sortOrder, name";
         if($currentId <> '')
             $query .= " AND id <> :id";
         var_dump($query);

@@ -5,6 +5,7 @@
         <tr>
             <th style="width:5%;">Id</th>
             <th style="width:50%;">Titre</th>
+            <th style="width:5%;">Ordre de tri</th>
         </tr>
     </table>
     <?php
@@ -16,6 +17,7 @@
                 <tr>
                     <td style="width:5%;"><?= $item['id']; ?></td>
                     <td style="width:50%;"><?= urldecode($item['title']); ?></td>
+                    <td style="width:5%;"><?= $item['sortOrder']; ?></td>
                 </tr>
             </table>
         </a>
