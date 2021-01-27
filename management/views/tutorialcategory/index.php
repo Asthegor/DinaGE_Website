@@ -9,14 +9,14 @@
         </tr>
     </table>
     <?php
-    foreach ($viewModel as $item)
+    foreach ($viewModelCategs as $item)
     {
     ?>
         <a href="<?= ROOT_MNGT.'tutorialcategory/update/'.$item['id']; ?>">
             <table style="width:100%;">
                 <tr>
                     <td style="width:5%;"><?= $item['id']; ?></td>
-                    <td style="width:50%;"><?= urldecode($item['title']); ?></td>
+                    <td style="width:50%;"><?= urldecode($item['name']); ?></td>
                     <td style="width:5%;"><?= $item['sortOrder']; ?></td>
                 </tr>
             </table>

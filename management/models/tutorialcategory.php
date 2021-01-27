@@ -6,7 +6,8 @@ class TutorialCategoryModel extends Model
     public function Index()
     {
         $this->query("SELECT id, name, description, sortOrder
-                      FROM tutorialcategory");
+                      FROM tutorialcategory
+                      ORDER BY sortOrder");
         $rows = $this->resultSet();
         $this->close();
         return $rows;
@@ -30,6 +31,7 @@ class TutorialCategoryModel extends Model
                               VALUES (:name, :description, :sortOrder)");
                 $this->bind(':name', $post['name']);
                 $this->bind(':description', $post['content']);
+                $this->bind(':sortOrder', $post['sortOrder']);
                 $resp = $this->execute();
                 //Verify
                 if($resp)

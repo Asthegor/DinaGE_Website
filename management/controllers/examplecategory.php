@@ -6,7 +6,7 @@ class ExampleCategory extends Controller
     {
         $this->checkLogin();
         $viewModel = new ExampleCategoryModel();
-        $this->returnView($viewModel->Index());
+        $this->returnView(array("viewModelCategs"=>$viewModel->Index()));
     }
 
     protected function add()

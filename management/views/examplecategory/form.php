@@ -27,12 +27,16 @@
                               });
         </script>
     </div>
+    <div class="form-group">
+        <label>Ordre de tri</label>
+        <input type="text" name="sortOrder" value="<?= $viewModel['sortOrder']; ?>" required />
+    </div>
     <input class="btn btn-primary" name="submit" type="submit" value="Submit" />
-    <a class="btn btn-warning" href="<?= ROOT_MNGT; ?>tutorials">Cancel</a>
+    <a class="btn btn-warning" href="<?= ROOT_MNGT; ?>examples">Cancel</a>
     <?php if (isset($viewModel['id']))
     {
         ?>
-        <a class="btn btn-danger" href="<?= ROOT_MNGT.'tutorialcategory/delete/'.$viewModel['id']; ?>">Delete</a><br>
+        <a class="btn btn-danger" href="<?= ROOT_MNGT.'examplecategory/delete/'.$viewModel['id']; ?>">Delete</a><br>
         <?php
     }
     ?>

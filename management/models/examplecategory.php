@@ -5,7 +5,7 @@ class ExampleCategoryModel extends Model
     private $returnPage = "examples";
     public function Index()
     {
-        $this->query("SELECT id, name, description ".
+        $this->query("SELECT id, name, description, sortOrder ".
                      "FROM examplecategory ".
                      "ORDER BY sortOrder");
         $rows = $this->resultSet();
@@ -27,10 +27,11 @@ class ExampleCategoryModel extends Model
                 // Insert into MySQL
                 $this->startTransaction();
                 // Insertion du nom français
-                $this->query("INSERT INTO examplecategory (name, description) ".
-                             "VALUES (:name, :description)");
+                $this->query("INSERT INTO examplecategory (name, description, sortOrder) ".
+                             "VALUES (:name, :description, :sortOrder)");
                 $this->bind(':name', $post['name']);
                 $this->bind(':description', $post['content']);
+                $this->bind(':sortOrder', $post['sortOrder']);
                 $resp = $this->execute();
                 //Verify
                 if($resp)
@@ -63,10 +64,11 @@ class ExampleCategoryModel extends Model
                 $this->startTransaction();
                 //Insertion des données générales
                 $this->query("UPDATE examplecategory ".
-                             "SET name = :name, description = :description ".
+                             "SET name = :name, description = :description, sortOrder = :sortOrder ".
                              "WHERE id = :id");
                 $this->bind(':name', $post['name']);
                 $this->bind(':description', $post['content']);
+                $this->bind(':sortOrder', $post['sortOrder']);
                 $this->bind(':id', $post['id']);
                 $resp = $this->execute();
                 //Verify
@@ -86,7 +88,7 @@ class ExampleCategoryModel extends Model
             }
         }
         $get = filter_input_array(INPUT_GET, FILTER_SANITIZE_ENCODED);
-        $this->query("SELECT id, name, description ".
+        $this->query("SELECT id, name, description, sortOrder ".
                      "FROM examplecategory WHERE id = :id");
         $this->bind(':id', $get['id']);
         $rows = $this->single();
@@ -131,7 +133,7 @@ class ExampleCategoryModel extends Model
     
     public function getlist($currentId)
     {
-        $query = "SELECT id, name, description 
+        $query = "SELECT id, name, description, sortOrder 
                   FROM examplecategory 
                   ORDER BY name";
         if($currentId <> '')

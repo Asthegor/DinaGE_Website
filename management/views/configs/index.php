@@ -1,4 +1,4 @@
-<h1>Barre de navigation</h1>
+<h1>Configurations</h1>
 <h5><a href="<?= ROOT_MNGT.'configs/add'; ?>">Nouvelle donnée</a></h5>
 <div class="navbar-index">
     <table style="width:100%; text-align:left;">
