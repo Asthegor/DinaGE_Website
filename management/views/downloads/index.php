@@ -8,10 +8,10 @@
         <?php
         foreach ($viewModel as $file)
         {
-            $name = basename($file);
             ?>
             <tr>
-                <td style="width:50%;"><?= $name; ?></td>
+                <td width="50%;"><?= $file->name; ?></td>
+                <td width="10%;"><?= $file->nbDownloads ?></td>
             </tr>
             <?php
         }

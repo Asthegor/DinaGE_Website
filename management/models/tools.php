@@ -1,4 +1,8 @@
 <?php
+class File {
+    public $name;
+    public $nbdownloads;
+}
 
 class ToolsModel extends Model
 {
@@ -7,7 +11,21 @@ class ToolsModel extends Model
 
     public function Index()
     {
-        return array_reverse(glob(ROOT_DIR . $this->targetDir . "*.zip"));
+        $arrFiles = array();
+        $arrZipFiles = array_reverse(glob(ROOT_DIR. $this->targetDir . "*.zip"));
+        foreach ($arrZipFiles as $Zipfile)
+        {
+            $ZipFileName = basename($Zipfile);
+            $countFile = fopen(ROOT_DIR. $this->targetDir . $ZipFileName."_counter.txt", "r");
+            $nbdownloads = fgets($countFile);
+            fclose($countFile);
+
+            $file = new File();
+            $file->name = $ZipFileName;
+            $file->nbdownloads = $nbdownloads;
+            array_push($arrFiles, $file);
+        }
+        return $arrFiles;
     }
 
     public function Add()
